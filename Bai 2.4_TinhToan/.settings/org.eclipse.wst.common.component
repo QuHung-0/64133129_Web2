@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+        
+    <wb-module deploy-name="Bai 2.4_TinhToan">
+                
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+                
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+                
+        <property name="context-root" value="Bai_2.4_Calculator"/>
+                
+        <property name="java-output-path" value="/Bai 2.4_TinhToan/build/classes"/>
+            
+    </wb-module>
+    
+</project-modules>
