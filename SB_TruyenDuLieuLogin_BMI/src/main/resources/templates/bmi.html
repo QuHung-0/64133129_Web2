@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>BMI</title>
+  <style>
+    .form-container {
+      width: 300px;
+      margin: 80px auto;
+      padding: 20px;
+      background-color: #4272c6; 
+      border-radius: 10px;
+    }
+    .text {
+      margin-bottom: 15px;
+      color: #fff;
+    }
+    .input-box {
+      margin: 10px 0;
+      width: 100%;
+      padding: 7px;
+      border: none;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    .submit-btn {
+      width: 100%;
+      padding: 10px;
+      background-color: #2C3E50;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+    }
+    
+    
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <form th:action="@{/bmi}" method="post">
+      <div>
+        <label class="text" for="height">chiều cao (m)</label>
+        <br/>
+        <input class="input-box" type="text" id="height" name="height" required>
+      </div>
+      <div>
+        <label class="text" for="weight">cân nặng (kg)</label>
+        <br/>
+        <input class="input-box" type="text" id="weight" name="weight" required>
+      </div>
+      <button type="submit" class="submit-btn">Tính BMI</button>
+    </form>
+    
+    <div class="text" th:if="${bmi != null}">
+      <p>BMI: <span th:text="${bmi}"></span></p>
+      <p>Đánh giá: <span th:text="${result}"></span></p>
+    </div>
+  </div>
+</body>
+</html>
