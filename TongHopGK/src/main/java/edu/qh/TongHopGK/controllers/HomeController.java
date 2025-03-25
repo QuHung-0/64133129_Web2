@@ -48,7 +48,7 @@ public class HomeController
 	@GetMapping("/addNew")
 	public String addNewForm(Model model)
 	{
-		return "addnew";
+		return "addNew";
 	}
 
 	@PostMapping("/addNew")
