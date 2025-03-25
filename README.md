@@ -1,8 +1,8 @@
 # 64133129_Web2
-![image description](Anh/anh1.png)
-![image description](Anh/anh2.png)
-![image description](Anh/anh3.png)
-![image description](Anh/anh4.png)
+![image description](TongHopGK/Anh/anh1.png)
+![image description](TongHopGK/Anh/anh2.png)
+![image description](TongHopGK/Anh/anh3.png)
+![image description](TongHopGK/Anh/anh4.png)
 👋 Xin chào!
 
 Mình là một lập trình viên phần mềm đang trên hành trình làm chủ Java, Tomcat và Servlet. Hiện tại, mình đang theo học ngành Khoa học Máy tính. Java là ngôn ngữ lập trình đầu tiên mình học khi vào đại học, và theo thời gian, mình càng trở nên hứng thú hơn. Bây giờ, mình rất hào hứng khám phá thế giới của các ứng dụng web Java. Dưới đây là một chút về nền tảng, sở thích và các dự án của mình!
