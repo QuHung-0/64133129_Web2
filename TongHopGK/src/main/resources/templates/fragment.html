@@ -8,10 +8,9 @@
 <body>
   <div th:fragment="header">
     <header style="position: relative;">
-      <img src="/images/background.jpg" alt="Background" style="width: 100%; height: 300px; object-fit: cover;">
-      <div style="position: absolute; top: 20px; left: 20px;">
-        <img src="/images/logo.png" alt="Logo" style="height: 80px;">
-      </div>
+    
+      <img src="https://ntu.edu.vn/Portals/6/ntu.edu.vn.png?ver=ckjn5juE3seliaBQFD_5vA%3d%3d" style="width: 100%; height: 30%; object-fit: cover;">
+      
     </header>
   </div>
 
@@ -25,9 +24,17 @@
       </div>
     </nav>
   </div>
+  
+  <div th:fragment="sideBar" class="d-flex flex-column align-items-center bg-light" style="height: 100vh;">
+    <img src="images/bg.jpg" 
+         alt="Sidebar Image" 
+         class="img-fluid w-100 h-100 rounded shadow">
+</div>
+
+
 
   <div th:fragment="footer">
-    <footer class="bg-dark text-white p-3 mt-4">
+    <footer class="bg-dark text-white p-1 mt-1">
       <div class="container text-center">
         <p>&copy; NGUYEN LU QUOC HUNG</p>
       </div>
