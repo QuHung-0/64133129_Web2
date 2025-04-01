@@ -63,4 +63,21 @@ public class TopicController
 		topicList.removeIf(t -> t.getId() == id);
 		return "redirect:/topic/all";
 	}
+	
+	@PostMapping("/topic/edit")
+    public String editTopic(@RequestParam("id") int id,
+                            @RequestParam("topicName") String topicName,
+                            @RequestParam("topicDescription") String topicDescription,
+                            @RequestParam("supervisorId") String supervisorId,
+                            @RequestParam("topicType") String topicType) {
+        Topic topic = topicList.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
+        if (topic != null) {
+            topic.setTopicName(topicName);
+            topic.setTopicDescription(topicDescription);
+            topic.setSupervisorId(supervisorId);
+            topic.setTopicType(topicType);
+        }
+        return "redirect:/topic/all";
+    }
 }
+

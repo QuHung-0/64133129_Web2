@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Student List</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="green-gradient">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-3">
+				<div th:insert="~{fragments::leftNav}"></div>
+			</div>
+			<div class="col-md-9">
+				<div th:insert="~{fragments::devBox}"></div>
+				<div id="content">
+					<h2>Student List</h2>
+					<a href="/student/new" class="btn btn-light mb-3">Add New
+						Student</a>
+					<div class="table-container">
+						<table class="table table-bordered table-hover">
+							<thead class="thead-dark">
+								<tr>
+									<th>STT</th>
+									<th>ID</th>
+									<th>Name</th>
+									<th>Group ID</th>
+									<th>Actions</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="student, stat : ${students}">
+									<td th:text="${stat.index + 1}"></td>
+									<td th:text="${student.id}"></td>
+									<td th:text="${student.name}"></td>
+									<td th:text="${student.groupId}"></td>
+									<td><a th:href="@{'/student/view/' + ${student.id}}"
+										class="btn btn-primary btn-sm">View</a> <a
+										th:href="@{'/student/edit/' + ${student.id}}"
+										class="btn btn-info btn-sm">Edit</a> <a
+										th:href="@{'/student/delete/' + ${student.id}}"
+										class="btn btn-danger btn-sm">Delete</a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:insert="~{fragments::footer}"></div>
+</body>
+</html>
