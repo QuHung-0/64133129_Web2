@@ -5,23 +5,18 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import thiGK.ntu64133129.model.Topic;
 
 @Controller
 public class TopicController
 {
-
 	private List<Topic> topicList = new ArrayList<>();
 	private int nextTopicId = 1;
 
 	public TopicController()
 	{
-		// Hard-code some topics
 		topicList.add(new Topic(nextTopicId++, "Topic 1", "dien ta 1", "S001", "Loai 1"));
 		topicList.add(new Topic(nextTopicId++, "Topic 2", "dien tan 2", "S002", "Loai 2"));
 	}
@@ -63,21 +58,32 @@ public class TopicController
 		topicList.removeIf(t -> t.getId() == id);
 		return "redirect:/topic/all";
 	}
-	
-	@PostMapping("/topic/edit")
-    public String editTopic(@RequestParam("id") int id,
-                            @RequestParam("topicName") String topicName,
-                            @RequestParam("topicDescription") String topicDescription,
-                            @RequestParam("supervisorId") String supervisorId,
-                            @RequestParam("topicType") String topicType) {
-        Topic topic = topicList.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
-        if (topic != null) {
-            topic.setTopicName(topicName);
-            topic.setTopicDescription(topicDescription);
-            topic.setSupervisorId(supervisorId);
-            topic.setTopicType(topicType);
-        }
-        return "redirect:/topic/all";
-    }
-}
 
+	@GetMapping("/topic/edit/{id}")
+	public String editTopicForm(@PathVariable("id") int id, Model model)
+	{
+		Topic topic = topicList.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
+		if (topic == null)
+		{
+			return "redirect:/topic/all";
+		}
+		model.addAttribute("topic", topic);
+		return "topicEdit";
+	}
+
+	@PostMapping("/topic/edit")
+	public String editTopic(@RequestParam("id") int id, @RequestParam("topicName") String topicName,
+			@RequestParam("topicDescription") String topicDescription,
+			@RequestParam("supervisorId") String supervisorId, @RequestParam("topicType") String topicType)
+	{
+		Topic topic = topicList.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
+		if (topic != null)
+		{
+			topic.setTopicName(topicName);
+			topic.setTopicDescription(topicDescription);
+			topic.setSupervisorId(supervisorId);
+			topic.setTopicType(topicType);
+		}
+		return "redirect:/topic/all";
+	}
+}

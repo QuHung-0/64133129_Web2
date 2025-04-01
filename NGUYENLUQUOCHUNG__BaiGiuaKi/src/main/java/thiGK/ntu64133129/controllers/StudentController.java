@@ -15,13 +15,11 @@ import thiGK.ntu64133129.model.Student;
 @Controller
 public class StudentController
 {
-
 	private List<Student> studentList = new ArrayList<>();
 	private int nextStudentId = 1;
 
 	public StudentController()
 	{
-		// Hard-code some students
 		studentList.add(new Student(nextStudentId++, "Nguyễn Thị Kim", "Nhóm 1"));
 		studentList.add(new Student(nextStudentId++, "Hà Nam Tân", "Nhóm 2"));
 	}
@@ -61,6 +59,29 @@ public class StudentController
 		studentList.removeIf(s -> s.getId() == id);
 		return "redirect:/student/all";
 	}
-	
-	
+
+	@GetMapping("/student/edit/{id}")
+	public String editStudentForm(@PathVariable("id") int id, Model model)
+	{
+		Student student = studentList.stream().filter(s -> s.getId() == id).findFirst().orElse(null);
+		if (student == null)
+		{
+			return "redirect:/student/all";
+		}
+		model.addAttribute("student", student);
+		return "studentEdit";
+	}
+
+	@PostMapping("/student/edit")
+	public String editStudent(@RequestParam("id") int id, @RequestParam("name") String name,
+			@RequestParam("groupId") String groupId)
+	{
+		Student student = studentList.stream().filter(s -> s.getId() == id).findFirst().orElse(null);
+		if (student != null)
+		{
+			student.setName(name);
+			student.setGroupId(groupId);
+		}
+		return "redirect:/student/all";
+	}
 }

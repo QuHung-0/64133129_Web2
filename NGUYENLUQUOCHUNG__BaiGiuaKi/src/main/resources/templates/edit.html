@@ -15,10 +15,8 @@
 
 	<div class="container mt-4 main-content">
 		<div class="row">
-			<!-- Main content (9 columns) -->
 			<div class="col-md-9">
 				<h2>Sửa Thông Tin Sinh Viên</h2>
-				<!-- 'sv' is provided by the controller in model.addAttribute("sv", found) -->
 				<form action="/edit" method="post">
 					<div class="form-group">
 						<label for="mssv">MSSV</label> <input type="text"
@@ -39,7 +37,6 @@
 				</form>
 			</div>
 
-			<!-- Sidebar (3 columns) -->
 			<div class="col-md-3">
 				<div th:insert="~{fragments::sidebar}"></div>
 			</div>
