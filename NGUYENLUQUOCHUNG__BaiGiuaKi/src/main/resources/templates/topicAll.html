@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Topic List</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="green-gradient">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-3">
+				<div th:insert="~{fragments::leftNav}"></div>
+			</div>
+			<div class="col-md-9">
+				<div th:insert="~{fragments::devBox}"></div>
+				<div id="content">
+					<h2>Topic List</h2>
+					<table class="table table-bordered table-hover">
+						<thead class="thead-dark">
+							<tr>
+								<th>ID</th>
+								<th>Topic Name</th>
+								<th>Supervisor ID</th>
+								<th>Topic Type</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="topic : ${topics}">
+								<td th:text="${topic.id}"></td>
+								<td th:text="${topic.topicName}"></td>
+								<td th:text="${topic.supervisorId}"></td>
+								<td th:text="${topic.topicType}"></td>
+								<td><a th:href="@{'/topic/view/' + ${topic.id}}"
+									class="btn btn-primary btn-sm">View</a> <a
+									th:href="@{'/topic/edit/' + ${topic.id}}"
+									class="btn btn-info btn-sm">Edit</a> <a
+									th:href="@{'/topic/delete/' + ${topic.id}}"
+									class="btn btn-danger btn-sm">Delete</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:insert="~{fragments::footer}"></div>
+</body>
+</html>
