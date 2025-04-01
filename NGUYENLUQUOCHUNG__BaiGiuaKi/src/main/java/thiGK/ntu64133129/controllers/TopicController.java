@@ -16,76 +16,51 @@ import thiGK.ntu64133129.model.Topic;
 public class TopicController
 {
 
-	private List<Topic> dsTopic;
+	private List<Topic> topicList = new ArrayList<>();
+	private int nextTopicId = 1;
 
 	public TopicController()
 	{
-		dsTopic = new ArrayList<>();
-		dsTopic.add(new Topic(1, "Lập trình Java", "Học lập trình Java nâng cao", "S001", "Lý thuyết"));
-		dsTopic.add(new Topic(2, "Phát triển Web", "Xây dựng website với Spring Boot", "S002", "Thực hành"));
-		dsTopic.add(new Topic(3, "Machine Learning", "Ứng dụng ML trong dự án", "S003", "Nghiên cứu"));
+		// Hard-code some topics
+		topicList.add(new Topic(nextTopicId++, "Topic 1", "dien ta 1", "S001", "Loai 1"));
+		topicList.add(new Topic(nextTopicId++, "Topic 2", "dien tan 2", "S002", "Loai 2"));
 	}
 
 	@GetMapping("/topic/all")
 	public String listTopics(Model model)
 	{
-		model.addAttribute("dsTopic", dsTopic);
-		return "topicList";
+		model.addAttribute("topics", topicList);
+		return "topicAll";
 	}
 
 	@GetMapping("/topic/new")
-	public String newTopicForm(Model model)
+	public String newTopicForm()
 	{
 		return "topicNew";
 	}
 
 	@PostMapping("/topic/new")
-	public String addNewTopic(@RequestParam("topicName") String topicName,
+	public String addTopic(@RequestParam("topicName") String topicName,
 			@RequestParam("topicDescription") String topicDescription,
-			@RequestParam("supervisorId") String supervisorId, @RequestParam("topicType") String topicType, Model model)
+			@RequestParam("supervisorId") String supervisorId, @RequestParam("topicType") String topicType)
 	{
-		int newId = dsTopic.size() + 1;
-		Topic t = new Topic(newId, topicName, topicDescription, supervisorId, topicType);
-		dsTopic.add(t);
+		Topic topic = new Topic(nextTopicId++, topicName, topicDescription, supervisorId, topicType);
+		topicList.add(topic);
 		return "redirect:/topic/all";
 	}
 
 	@GetMapping("/topic/view/{id}")
 	public String viewTopic(@PathVariable("id") int id, Model model)
 	{
-		Topic found = dsTopic.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
-		model.addAttribute("topic", found);
+		Topic topic = topicList.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
+		model.addAttribute("topic", topic);
 		return "topicView";
 	}
 
 	@GetMapping("/topic/delete/{id}")
 	public String deleteTopic(@PathVariable("id") int id)
 	{
-		dsTopic.removeIf(t -> t.getId() == id);
-		return "redirect:/topic/all";
-	}
-
-	@GetMapping("/topic/edit/{id}")
-	public String editTopicForm(@PathVariable("id") int id, Model model)
-	{
-		Topic found = dsTopic.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
-		model.addAttribute("topic", found);
-		return "topicEdit";
-	}
-
-	@PostMapping("/topic/edit")
-	public String editTopic(@RequestParam("id") int id, @RequestParam("topicName") String topicName,
-			@RequestParam("topicDescription") String topicDescription,
-			@RequestParam("supervisorId") String supervisorId, @RequestParam("topicType") String topicType)
-	{
-		Topic found = dsTopic.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
-		if (found != null)
-		{
-			found.setTopicName(topicName);
-			found.setTopicDescription(topicDescription);
-			found.setSupervisorId(supervisorId);
-			found.setTopicType(topicType);
-		}
+		topicList.removeIf(t -> t.getId() == id);
 		return "redirect:/topic/all";
 	}
 }
