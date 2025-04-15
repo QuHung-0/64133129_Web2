@@ -1,9 +1,4 @@
 # 64133129_Web2
-![image description](NGUYENLUQUOCHUNG__BaiGiuaKi/Screenshot 2025-04-01 at 10-38-24 Student List.png)
-![image description](NGUYENLUQUOCHUNG__BaiGiuaKi/Screenshot 2025-04-01 at 10-40-20 Topic List.png)
-![image description](NGUYENLUQUOCHUNG__BaiGiuaKi/Screenshot 2025-04-01 at 10-40-28 Topic Add New.png)
-![image description](NGUYENLUQUOCHUNG__BaiGiuaKi/Screenshot 2025-04-01 at 10-40-39 Student List.png)
-![image description](NGUYENLUQUOCHUNG__BaiGiuaKi/Screenshot 2025-04-01 at 10-41-02 Add New Student.png)
 👋 Xin chào!
 
 Mình là một lập trình viên phần mềm đang trên hành trình làm chủ Java, Tomcat và Servlet. Hiện tại, mình đang theo học ngành Khoa học Máy tính. Java là ngôn ngữ lập trình đầu tiên mình học khi vào đại học, và theo thời gian, mình càng trở nên hứng thú hơn. Bây giờ, mình rất hào hứng khám phá thế giới của các ứng dụng web Java. Dưới đây là một chút về nền tảng, sở thích và các dự án của mình!

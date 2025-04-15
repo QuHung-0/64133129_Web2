@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Dashboard</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="green-gradient">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-3">
+				<div th:insert="~{fragments::leftNav}"></div>
+			</div>
+			<div class="col-md-9">
+				<div th:insert="~{fragments::devBox}"></div>
+				<div id="content">
+					<p>Họ và tên: Nguyễn Lữ Quốc Hưng</p>
+					<p>MSSV: 64133129</p>
+					<p>Lớp: 64.CNTT CLC 1</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:insert="~{fragments::footer}"></div>
+</body>
+</html>
