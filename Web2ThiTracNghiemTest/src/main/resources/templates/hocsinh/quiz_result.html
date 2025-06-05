@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Kết Quả Quiz</title>
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<style>
+.dung {
+	background-color: #d4edda; /* xanh nhạt */
+}
+
+.sai {
+	background-color: #f8d7da; /* đỏ nhạt */
+}
+</style>
+</head>
+<body class="bg-light">
+
+	<div th:replace="fragments/header :: header"></div>
+
+	<div class="container mt-5">
+
+		<h2>Kết Quả Quiz</h2>
+		<p>
+			<strong>Số câu đúng:</strong>
+			<!-- demDung / ketQuaList.size() -->
+			<span th:text="${demDung} + ' / ' + ${ketQuaList.size()}"></span>
+		</p>
+		<hr>
+
+		<!-- 1. Lặp qua ketQuaList -->
+		<div th:each="item, iterStat : ${ketQuaList}"
+			class="mb-4 p-3 border rounded"
+			th:classappend="${item.dung} ? 'dung' : 'sai'">
+
+			<!-- 2. Hiển thị số thứ tự (iterStat.count) -->
+			<p>
+				<strong
+					th:utext="'Câu ' + ${iterStat.count} + ': ' + ${item.cauHoi.noiDungCauHoi}">
+					Câu hỏi </strong>
+			</p>
+
+			<!-- 3. Hiển thị đáp án học sinh chọn -->
+			<div class="mb-2">
+				<em>Đáp án bạn chọn:</em>
+				<p th:utext="${item.dapAnDaChon}">Đáp án của bạn...</p>
+			</div>
+
+			<!-- 4. Hiển thị đáp án đúng -->
+			<div class="mb-2">
+				<em>Đáp án đúng:</em>
+				<p th:utext="${item.dapAnDung}">Đáp án đúng...</p>
+			</div>
+
+		</div>
+
+		<a href="/hocsinh/choose-subject" class="btn btn-primary">Làm Quiz
+			Khác</a>
+	</div>
+
+	<div th:replace="fragments/footer :: footer"></div>
+	<script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

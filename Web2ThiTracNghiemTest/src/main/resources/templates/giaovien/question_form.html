@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${isEdit} ? 'Sửa Câu Hỏi' : 'Tạo Câu Hỏi Mới'">Form
+	Câu Hỏi</title>
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+<!-- Kết nối TinyMCE offline -->
+<script src="/tinymce/tinymce.min.js"></script>
+<script>
+	// Thiết lập TinyMCE cho tất cả các textarea có class="tinymce"
+	tinymce
+			.init({
+				selector : 'textarea.tinymce',
+				menubar : false,
+				plugins : 'link image lists code',
+				toolbar : 'undo redo | bold italic underline | alignleft aligncenter alignright | bullist numlist outdent indent | link image | code',
+				height : 200
+			});
+</script>
+</head>
+<body class="d-flex flex-column min-vh-100 bg-light">
+
+
+	<div th:replace="fragments/header :: header"></div>
+
+	<div class="container mt-5">
+		<h2
+			th:text="${isEdit} ? 'Sửa Câu Hỏi cho môn: ' + ${monHoc.tenMonHoc} : 'Tạo Câu Hỏi cho môn: ' + ${monHoc.tenMonHoc}"></h2>
+
+		<!-- Hiển thị thông báo lỗi nếu có (tuỳ bạn thêm validation) -->
+		<form th:action="@{/giaovien/question/save}" method="post">
+			<!-- Luôn có monHocId -->
+			<input type="hidden" name="monHocId" th:value="${monHoc.monHocId}" />
+
+			<!-- Nếu là chỉnh sửa, thêm hidden cauHoiId -->
+			<div th:if="${isEdit}">
+				<input type="hidden" name="cauHoiId" th:value="${cauHoi.cauHoiId}" />
+			</div>
+
+			<!-- 1) TinyMCE cho Nội dung Câu Hỏi -->
+			<div class="mb-3">
+				<label class="form-label">Nội Dung Câu Hỏi:</label>
+				<textarea class="form-control tinymce" name="noiDungCauHoi" required
+					th:text="${cauHoi.noiDungCauHoi}"></textarea>
+			</div>
+
+			<!-- 2) 4 TinyMCE cho 4 đáp án -->
+			<div class="mb-3">
+				<label class="form-label">Đáp Án 1:</label>
+				<textarea class="form-control tinymce" name="dapAn1" required
+					th:text="${#lists.size(dsTraLoiTemp) > 0 ? dsTraLoiTemp.get(0).noiDungTraLoi : ''}"></textarea>
+			</div>
+			<div class="mb-3">
+				<label class="form-label">Đáp Án 2:</label>
+				<textarea class="form-control tinymce" name="dapAn2" required
+					th:text="${#lists.size(dsTraLoiTemp) > 1 ? dsTraLoiTemp.get(1).noiDungTraLoi : ''}"></textarea>
+			</div>
+			<div class="mb-3">
+				<label class="form-label">Đáp Án 3:</label>
+				<textarea class="form-control tinymce" name="dapAn3" required
+					th:text="${#lists.size(dsTraLoiTemp) > 2 ? dsTraLoiTemp.get(2).noiDungTraLoi : ''}"></textarea>
+			</div>
+			<div class="mb-3">
+				<label class="form-label">Đáp Án 4:</label>
+				<textarea class="form-control tinymce" name="dapAn4" required
+					th:text="${#lists.size(dsTraLoiTemp) > 3 ? dsTraLoiTemp.get(3).noiDungTraLoi : ''}"></textarea>
+			</div>
+
+			<!-- 3) Chọn đáp án đúng (1..4) -->
+			<div class="mb-3">
+				<label class="form-label">Chọn đáp án ĐÚNG:</label> <select
+					class="form-select" name="dapAnDung" required>
+					<option value="" disabled th:if="${!isEdit}" selected>--
+						Chọn đáp án đúng --</option>
+					<!-- Nếu là sửa, ta cần đánh dấu option đúng sẵn -->
+					<option value="1"
+						th:selected="${isEdit && dsTraLoiTemp.get(0).dung}">Đáp
+						Án 1</option>
+					<option value="2"
+						th:selected="${isEdit && dsTraLoiTemp.get(1).dung}">Đáp
+						Án 2</option>
+					<option value="3"
+						th:selected="${isEdit && dsTraLoiTemp.get(2).dung}">Đáp
+						Án 3</option>
+					<option value="4"
+						th:selected="${isEdit && dsTraLoiTemp.get(3).dung}">Đáp
+						Án 4</option>
+				</select>
+			</div>
+
+			<button type="submit" class="btn btn-success">
+				<span th:text="${isEdit} ? 'Cập Nhật' : 'Lưu Mới'"></span>
+			</button>
+			<a th:href="@{/giaovien/question/list(monHocId=${monHoc.monHocId})}"
+				class="btn btn-link">Hủy</a>
+		</form>
+	</div>
+
+	<div th:replace="fragments/footer :: footer"></div>
+
+	<script src="/js/bootstrap.bundle.min.js"></script>
+
+
+</body>
+</html>

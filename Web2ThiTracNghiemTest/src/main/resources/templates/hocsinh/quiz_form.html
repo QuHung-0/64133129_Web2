@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="'Quiz Môn: ' + ${monHoc.tenMonHoc}">Quiz</title>
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+
+	<!-- Header chung -->
+	<div th:replace="fragments/header :: header"></div>
+
+	<div class="container mt-5">
+		<h2 th:text="'Quiz Môn: ' + ${monHoc.tenMonHoc}"></h2>
+		<form action="/hocsinh/submit-quiz" method="post">
+			<input type="hidden" name="danhSachId" th:value="${danhSachId}" />
+			<div th:each="cau, idx : ${dsCauHoi}" class="mb-4 p-3 border rounded">
+				<p>
+					<strong
+						th:utext="'Câu ' + ${idx.count} + ': ' + ${cau.noiDungCauHoi}"></strong>
+				</p>
+				<div class="form-check"
+					th:each="da : ${cauTraLoiRepo.findByCauHoi(cau)}">
+					<input class="form-check-input" type="radio"
+						th:id="${'radio_' + da.cauTraLoiId}"
+						th:name="${'cau_' + cau.cauHoiId}" th:value="${da.cauTraLoiId}"
+						required> <label class="form-check-label"
+						th:for="${'radio_' + da.cauTraLoiId}"
+						th:utext="${da.noiDungTraLoi}"></label>
+				</div>
+			</div>
+			<button type="submit" class="btn btn-success">Nộp Bài</button>
+		</form>
+		<a href="/hocsinh/choose-subject" class="btn btn-link mt-3">Quay
+			lại Chọn Môn</a>
+	</div>
+
+	<!-- Footer chung -->
+	<div th:replace="fragments/footer :: footer"></div>
+
+	<script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

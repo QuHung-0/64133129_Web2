@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Đăng Ký</title>
+<!-- Kết nối Bootstrap offline -->
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+	<div class="container mt-5">
+		<div class="row justify-content-center">
+			<div class="col-md-6">
+				<div class="card shadow rounded-2">
+					<div class="card-body">
+						<h3 class="card-title mb-4 text-center">Đăng Ký Tài Khoản</h3>
+						<!-- Hiển thị thông báo lỗi nếu có -->
+						<div th:if="${error}" class="alert alert-danger"
+							th:text="${error}"></div>
+						<form th:action="@{/register}" th:object="${taiKhoan}"
+							method="post">
+							<div class="mb-3">
+								<label for="hoTen" class="form-label">Họ và Tên:</label> <input
+									type="text" th:field="*{hoTen}" class="form-control" id="hoTen"
+									placeholder="Nhập họ tên" required>
+							</div>
+							<div class="mb-3">
+								<label for="tenDangNhap" class="form-label">Tên Đăng
+									Nhập:</label> <input type="text" th:field="*{tenDangNhap}"
+									class="form-control" id="tenDangNhap"
+									placeholder="Nhập tên đăng nhập" required>
+							</div>
+							<div class="mb-3">
+								<label for="matKhau" class="form-label">Mật Khẩu:</label> <input
+									type="password" th:field="*{matKhau}" class="form-control"
+									id="matKhau" placeholder="Nhập mật khẩu" required>
+							</div>
+							<div class="mb-3">
+								<label for="vaiTro" class="form-label">Vai Trò:</label> <select
+									th:field="*{vaiTro}" class="form-select" id="vaiTro" required>
+									<option value="" disabled selected>-- Chọn vai trò --</option>
+									<option value="GIAO_VIEN">Giáo Viên</option>
+									<option value="HOC_SINH">Học Sinh</option>
+								</select>
+							</div>
+							<button type="submit" class="btn btn-primary w-100">Đăng
+								Ký</button>
+						</form>
+						<hr>
+						<p class="text-center">
+							Đã có tài khoản? <a th:href="@{/login}">Đăng Nhập</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Kết nối JS của Bootstrap offline -->
+	<script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

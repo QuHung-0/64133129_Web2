@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Đăng Nhập</title>
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+	<div class="container mt-5">
+		<div class="row justify-content-center">
+			<div class="col-md-6">
+				<div class="card shadow rounded-2">
+					<div class="card-body">
+						<h3 class="card-title mb-4 text-center">Đăng Nhập</h3>
+						<!-- Hiển thị thông báo lỗi nếu có -->
+						<div th:if="${error}" class="alert alert-danger"
+							th:text="${error}"></div>
+						<div th:if="${message}" class="alert alert-success"
+							th:text="${message}"></div>
+						<form th:action="@{/login}" method="post">
+							<div class="mb-3">
+								<label for="tenDangNhap" class="form-label">Tên Đăng
+									Nhập:</label> <input type="text" name="tenDangNhap"
+									class="form-control" id="tenDangNhap"
+									placeholder="Nhập tên đăng nhập" required>
+							</div>
+							<div class="mb-3">
+								<label for="matKhau" class="form-label">Mật Khẩu:</label> <input
+									type="password" name="matKhau" class="form-control"
+									id="matKhau" placeholder="Nhập mật khẩu" required>
+							</div>
+							<button type="submit" class="btn btn-success w-100">Đăng
+								Nhập</button>
+						</form>
+						<hr>
+						<p class="text-center">
+							Chưa có tài khoản? <a th:href="@{/register}">Đăng Ký Ngay</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Học Sinh – Chọn Môn</title>
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<style>
+.subject-circle {
+	width: 150px;
+	height: 150px;
+	font-size: 1.1rem;
+	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 5%;
+	color: white;
+	text-decoration: none;
+}
+
+.subject-circle:hover {
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+	text-decoration: none;
+	color: white;
+}
+</style>
+</head>
+<body class="d-flex flex-column min-vh-100 bg-light">
+
+	<div th:replace="fragments/header :: header"></div>
+
+	<main class="flex-grow-1">
+		<div class="container mt-5">
+			<h2 class="mb-4">Chọn Môn Để Làm Quiz</h2>
+			<div class="d-flex flex-wrap justify-content-start">
+				<div th:each="sc : ${dsWithColors}" class="m-3">
+					<a th:href="@{/hocsinh/take-quiz(monHocId=${sc.monHoc.monHocId})}"
+						th:class="'subject-circle ' + ${sc.colorClass}"
+						th:text="${sc.monHoc.tenMonHoc}"> Tên Môn </a>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<!-- 3. Chèn footer -->
+	<div th:replace="fragments/footer :: footer"></div>
+
+	<script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Danh Sách Môn Học</title>
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body class="d-flex flex-column min-vh-100 bg-light">
+
+	<div th:replace="fragments/header :: header"></div>
+
+	<main class="flex-grow-1">
+		<div class="container mt-5">
+			<h2>Danh Sách Môn Học</h2>
+			<a href="/giaovien/subject/form" class="btn btn-primary mb-3">Thêm
+				Môn Học Mới</a>
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Tên Môn Học</th>
+						<th>Hành Động</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="mh, idx : ${dsMonHoc}">
+						<td th:text="${idx.count}">1</td>
+						<td th:text="${mh.tenMonHoc}">Tên môn</td>
+						<td>
+							<!-- Sửa --> <a
+							th:href="@{/giaovien/subject/form(monHocId=${mh.monHocId})}"
+							class="btn btn-sm btn-warning">Sửa</a> <!-- Xóa --> <a
+							th:href="@{/giaovien/subject/delete(monHocId=${mh.monHocId})}"
+							class="btn btn-sm btn-danger"
+							onclick="return confirm('Bạn có chắc muốn xóa môn này? Các câu hỏi liên quan sẽ bị xóa!');">
+								Xóa </a> <!-- Xem câu hỏi của môn --> <a
+							th:href="@{/giaovien/question/list(monHocId=${mh.monHocId})}"
+							class="btn btn-sm btn-info">Câu hỏi</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</main>
+
+	<div th:replace="fragments/footer :: footer"></div>
+	<script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
