@@ -11,11 +11,10 @@ public class MonHoc
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	// Cột trong DB là `MonHoc_ID`
 	@Column(name = "MonHoc_ID")
-	private Integer monHocId; // biến Java “giống” cột MonHoc_ID
-
+	private Integer monHocId; 
+	
 	@Column(name = "TenMonHoc", nullable = false)
-	private String tenMonHoc; // biến Java tương ứng với cột TenMonHoc
-
+	private String tenMonHoc; 
 	// ===== Constructor mặc định =====
 	public MonHoc()
 	{

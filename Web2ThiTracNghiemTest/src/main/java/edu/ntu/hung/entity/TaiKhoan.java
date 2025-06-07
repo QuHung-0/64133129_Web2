@@ -9,7 +9,6 @@ public class TaiKhoan
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	// 1) Bổ sung @Column(name = "TaiKhoan_ID") để Hibernate biết đúng cột
 	@Column(name = "TaiKhoan_ID")
 	private Integer taiKhoanId;
 

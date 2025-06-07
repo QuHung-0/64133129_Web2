@@ -83,8 +83,6 @@ public class TeacherQuestionController
 				return "redirect:/giaovien/question/list?monHocId=" + monHocId;
 			}
 			List<CauTraLoi> dsTraLoiExist = cauTraLoiRepo.findByCauHoi(chEdit);
-			// Nếu chưa đủ 4 (thường phải đủ 4), bạn có thể bổ sung phần xử lý, nhưng giả sử
-			// DB luôn có 4
 
 			model.addAttribute("monHoc", monHoc);
 			model.addAttribute("cauHoi", chEdit);
@@ -128,8 +126,6 @@ public class TeacherQuestionController
 		cauHoiRepo.save(cauHoi);
 
 		// 3) XỬ LÝ 4 đáp án
-		// Nếu SỬA: trước hết xóa hết 4 đáp án cũ (có thể giữ ID để update, nhưng ta bất
-		// cứ sửa hay thêm mới cũng có thể xóa rồi tạo lại)
 		if (cauHoiId != null)
 		{
 			// Xóa tất cả đáp án cũ của câu hỏi này
